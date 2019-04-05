@@ -35,7 +35,7 @@ public class ItemViewFragment extends Fragment {
     RecyclerView recyclerView;
     private View rootview;
     private VolunteerAdapter volunteerAdapter;
-    private List<Volunteer> volunteers;
+    private List<Volunteer> volunteers = Collections.emptyList();
 
 
     void setFragmentListener(FragmentInterface fragmentListener) {
@@ -104,6 +104,7 @@ public class ItemViewFragment extends Fragment {
         recyclerView = rootview.findViewById(R.id.recycler_fragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootview.getContext()));
         volunteerAdapter = new VolunteerAdapter(fragmentListener);
+        volunteerAdapter.setVolunteerList(volunteers);
         recyclerView.setAdapter(volunteerAdapter);
     }
 
