@@ -37,22 +37,14 @@ public class ItemViewFragment extends Fragment {
     private VolunteerAdapter volunteerAdapter;
     private List<Volunteer> volunteers = Collections.emptyList();
 
-
-    void setFragmentListener(FragmentInterface fragmentListener) {
-        this.fragmentListener = fragmentListener;
-    }
-
     private FragmentInterface fragmentListener;
 
-    public ItemViewFragment() {
-
-
+    public  ItemViewFragment () {
     }
 
 
     public static ItemViewFragment newInstance() {
         ItemViewFragment fragment = new ItemViewFragment();
-
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;

@@ -1,11 +1,13 @@
 package com.example.lendahand.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.lendahand.FragmentInterface;
 import com.example.lendahand.R;
+import com.example.lendahand.model.Volunteer;
 import com.squareup.picasso.Picasso;
 
 public class DisplayFragment extends Fragment {
@@ -23,11 +26,22 @@ public class DisplayFragment extends Fragment {
     private TextView org2;
     private ImageView image;
     private TextView mission;
+    private TextView location;
     private Button signup;
 
-    private String org;
+
+    private static final String ARG_ORG="org";
+    private static final String ARG_MISSION= "mission";
+    private static final String ARG_IMAGE = "image";
+    private static final String ARG_SIGNUP ="url";
+
+    private String org1;
     private String mission1;
+    private String image1;
+    private String location1;
     private String signup1;
+
+    private Volunteer volunteer;
 
 
     private FragmentInterface mListener;
@@ -37,9 +51,13 @@ public class DisplayFragment extends Fragment {
     }
 
 
-    public static DisplayFragment newInstance() {
+    public static DisplayFragment newInstance(Volunteer volunteer) {
         DisplayFragment fragment = new DisplayFragment();
         Bundle args = new Bundle();
+        args.putString(ARG_MISSION,volunteer.getMission());
+        args.putString(ARG_ORG,volunteer.getOrginization());
+        args.putString(ARG_IMAGE,volunteer.getImage());
+        args.putString(ARG_SIGNUP,volunteer.getUrl());
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,8 +65,13 @@ public class DisplayFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
+        Bundle args = getArguments();
+        if (args != null) {
+            org1 = getArguments().getString(ARG_ORG);
+            mission1= getArguments().getString(ARG_MISSION);
+            image1 = getArguments().getString(ARG_IMAGE);
+            signup1 = getArguments().getString(ARG_SIGNUP);
+            Log.e("OrgURL:", signup1);
         }
     }
 
@@ -57,6 +80,19 @@ public class DisplayFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         rootview = inflater.inflate(R.layout.fragment_display, container, false);
+        org2 = rootview.findViewById(R.id.org);
+        image = rootview.findViewById(R.id.image);
+        mission = rootview.findViewById(R.id.mission_body);
+        location = rootview.findViewById(R.id.location_body);
+        signup = rootview.findViewById(R.id.sign_up);
+
+
+        org2.setText(org1);
+
+        mission.setText(mission1);
+        location.setText(location1);
+        signup.setText("Signup");
+
         return rootview;
     }
 
@@ -64,20 +100,16 @@ public class DisplayFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        org2 = rootview.findViewById(R.id.org);
-        image = rootview.findViewById(R.id.image);
-        mission = rootview.findViewById(R.id.mission);
-        signup = rootview.findViewById(R.id.sign_up);
 
-        org2.setText(org);
-        mission.setText(mission1);
-        signup.setText(signup1);
-//        Picasso.get().load(volunteer.getImage()).fit().into(image);
+        Picasso.get().load(image1).fit().into(image);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.e("URL: ", "onClick: " + signup1);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                browserIntent.setData(Uri.parse(signup1));
+                startActivity(browserIntent);
             }
         });
 

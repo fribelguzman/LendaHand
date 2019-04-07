@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".SplashActivity"
     android:background="@color/white">
 
-    <FrameLayout
-        android:id="@+id/container"
+
+    <com.felipecsl.gifimageview.library.GifImageView
+        android:id="@+id/hands"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:scaleType="fitCenter"
+        android:background="@color/white"
+        />
 </android.support.constraint.ConstraintLayout>

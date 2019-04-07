@@ -1,8 +1,11 @@
 package com.example.lendahand;
 
+import com.example.lendahand.model.Volunteer;
+
 public interface FragmentInterface {
 
-  void showDisplayFragment();
+    void showDisplayFragment(Volunteer volunteer);
 
-//    void showSecondFragment();
+//    void showItemViewFragment(Volunteer volunteer);
+
 }

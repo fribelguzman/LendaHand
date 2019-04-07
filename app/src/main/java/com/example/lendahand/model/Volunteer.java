@@ -5,6 +5,16 @@ public class Volunteer {
     String orginization;
     String category;
     String image;
+    String mission;
+    String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getMission() {
+        return mission;
+    }
 
     public String getImage() {
         return image;
