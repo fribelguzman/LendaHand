@@ -84,13 +84,7 @@ public class DisplayFragment extends Fragment {
             image1 = getArguments().getString(ARG_IMAGE);
             signup1 = getArguments().getString(ARG_SIGNUP);
             Log.e("OrgURL:", signup1);
-
-
-
-
         }
-
-
     }
 
     @Override
@@ -133,7 +127,7 @@ public class DisplayFragment extends Fragment {
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //if clicked once added to faves if not , nothing,
+                //if clicked once added to faves if not , nothing,
                 //add toast to top of page
                 Toast toast = Toast.makeText(getContext(), "Added to Faves", Toast.LENGTH_SHORT);
                 toast.show();
@@ -158,6 +152,4 @@ public class DisplayFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
-
 }

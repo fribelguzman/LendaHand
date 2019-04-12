@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements FragmentInterface
     @Override
     public void showDisplayFragment(Volunteer volunteer) {
         Fragment fragment;
-        fragment = new DisplayFragment();
+        fragment = DisplayFragment.newInstance(volunteer);
         navigateTo(fragment);
     }
 
