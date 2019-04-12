@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,9 +39,11 @@ public class ItemViewFragment extends Fragment {
     private VolunteerAdapter volunteerAdapter;
     private List<Volunteer> volunteers = Collections.emptyList();
 
+    private final static String TAG = ItemViewFragment.class.getSimpleName();
+
     private FragmentInterface fragmentListener;
 
-    public  ItemViewFragment () {
+    public ItemViewFragment() {
     }
 
 
@@ -55,28 +59,32 @@ public class ItemViewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
-
-            retrofit = RetrofitSingleton.getInstance();
-
-            VolunteerService service = retrofit.create(VolunteerService.class);
-            Call<VolunteerList> volunteerList = service.getVolunteer();
-            volunteerList.enqueue(new Callback<VolunteerList>() {
-
-                @Override
-                public void onResponse(Call<VolunteerList> call, Response<VolunteerList> response) {
-                    VolunteerList responseModel = response.body();
-                    volunteers = responseModel.getVolunteerList();
-                    volunteerAdapter.setVolunteerList(volunteers);
-
-                    Log.d("README", response.body().toString());
-                }
-
-                @Override
-                public void onFailure(Call<VolunteerList> call, Throwable t) {
-                    Log.d("README", t.getMessage());
-                }
-            });
+        } else {
+            Log.d(TAG, "onCreate: null");
         }
+
+        retrofit = RetrofitSingleton.getInstance();
+
+        VolunteerService service = retrofit.create(VolunteerService.class);
+        Call<VolunteerList> volunteerList = service.getVolunteer();
+        volunteerList.enqueue(new Callback<VolunteerList>() {
+
+            @Override
+            public void onResponse(Call<VolunteerList> call, Response<VolunteerList> response) {
+                Log.d(TAG, "Fribel - " + response.body().toString());
+                VolunteerList responseModel = response.body();
+                volunteers = responseModel.getVolunteerList();
+                Log.d(TAG, "onResponse: List - " + volunteers.size());
+                Log.d(TAG, "onResponse: List - " + volunteers.get(0).getUrl());
+                volunteerAdapter.setVolunteerList(volunteers);
+
+            }
+
+            @Override
+            public void onFailure(Call<VolunteerList> call, Throwable t) {
+                Log.d(TAG, t.getMessage());
+            }
+        });
     }
 
     @Override
@@ -93,10 +101,14 @@ public class ItemViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         recyclerView = rootview.findViewById(R.id.recycler_fragment);
         recyclerView.setLayoutManager(new LinearLayoutManager(rootview.getContext()));
         volunteerAdapter = new VolunteerAdapter(fragmentListener);
+        Log.d(TAG, "onViewCreated: " + volunteerAdapter.getItemCount());
         volunteerAdapter.setVolunteerList(volunteers);
+        Log.d(TAG, "onViewCreated: List - " + volunteers.size());
+
         recyclerView.setAdapter(volunteerAdapter);
     }
 

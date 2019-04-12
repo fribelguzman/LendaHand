@@ -6,6 +6,10 @@ public interface FragmentInterface {
 
     void showDisplayFragment(Volunteer volunteer);
 
-//    void showItemViewFragment(Volunteer volunteer);
+    void showItemViewFragment(Volunteer volunteer);
+
+    void showLikeFragment (Volunteer volunteer);
+
+//    void showCalendarFragment;
 
 }

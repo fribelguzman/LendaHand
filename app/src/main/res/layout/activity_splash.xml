@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
-    android:background="@color/white">
+    android:id="@+id/splash"
+    >
 
 
     <com.felipecsl.gifimageview.library.GifImageView
@@ -13,6 +14,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitCenter"
-        android:background="@color/white"
         />
 </android.support.constraint.ConstraintLayout>
