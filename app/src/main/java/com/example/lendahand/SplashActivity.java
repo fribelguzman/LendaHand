@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
@@ -18,9 +20,11 @@ import com.felipecsl.gifimageview.library.GifImageView;
 import com.squareup.picasso.Picasso;
 
 public class SplashActivity extends AppCompatActivity {
-    private GifImageView gifImageView;
+//    private GifImageView gifImageView;
     private Handler handler;
     private Runnable runnable;
+    private ImageView logo2;
+
 
 
     @Override
@@ -28,10 +32,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        gifImageView = findViewById(R.id.hands);
 
+        logo2 = findViewById(R.id.logo1);
 
-        Glide.with(this).load(R.raw.giphy).into(gifImageView);
+        Glide.with(this).load(R.drawable.logo).into(logo2);
+//        gifImageView = findViewById(R.id.hands);
+//        Glide.with(this).load(R.raw.giphy).into(gifImageView);
 
         runnable = new Runnable() {
             @Override
